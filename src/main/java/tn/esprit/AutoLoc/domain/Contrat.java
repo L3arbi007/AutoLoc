@@ -1,9 +1,6 @@
 package tn.esprit.AutoLoc.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +15,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Contrat {
+    @OneToOne
+    @jakarta.persistence.JoinColumn(name = "id_reservation", unique = true)
+    private Reservation reservation;
+
+    @OneToOne(mappedBy = "contrat")
+    private Paiement paiement;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idContrat;
